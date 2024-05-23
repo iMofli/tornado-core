@@ -45,6 +45,19 @@ module.exports = {
       // timeoutBlocks: 200,
       skipDryRun: true,
     },
+    sepolia: {
+      provider: () =>
+        new HDWalletProvider(
+          process.env.PRIVATE_KEY,
+          'wss://eth-sepolia.g.alchemy.com/v2/Es-Rz4Bb7FtqRRxzNPu8VExvb_QAI3JF',
+        ),
+      network_id: 11155111, // Sepolia's network ID
+      gas: 4000000, // Adjust the gas limit as per your requirements
+      gasPrice: 10000000000, // Set the gas price to an appropriate value
+      confirmations: 2, // Set the number of confirmations needed for a transaction
+      timeoutBlocks: 200, // Set the timeout for transactions
+      skipDryRun: true, // Skip the dry run option
+    },
     rinkeby: {
       provider: () =>
         new HDWalletProvider(
