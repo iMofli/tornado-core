@@ -2,6 +2,8 @@ require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 const utils = require('web3-utils')
 
+const moonbeamAlphaRpcUrl = 'https://rpc.api.moonbase.moonbeam.network'
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -57,6 +59,15 @@ module.exports = {
       confirmations: 2, // Set the number of confirmations needed for a transaction
       timeoutBlocks: 200, // Set the timeout for transactions
       skipDryRun: true, // Skip the dry run option
+    },
+    moonbeamAlpha: {
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, moonbeamAlphaRpcUrl),
+      network_id: 1287,
+      gas: 6000000,
+      gasPrice: utils.toWei('1', 'gwei'),
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
     },
     rinkeby: {
       provider: () =>
