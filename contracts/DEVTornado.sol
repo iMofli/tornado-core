@@ -13,14 +13,18 @@
 pragma solidity ^0.7.0;
 
 import "./Tornado.sol";
+import "./Whitelist.sol";
 
-contract ETHTornado is Tornado {
+contract DEVTornado is Tornado, Whitelist {
+
   constructor(
     IVerifier _verifier,
     IHasher _hasher,
     uint256 _denomination,
-    uint32 _merkleTreeHeight
-  ) Tornado(_verifier, _hasher, _denomination, _merkleTreeHeight) {}
+    uint32 _merkleTreeHeight,
+    address[] memory _owners
+  ) Tornado(_verifier, _hasher, _denomination, _merkleTreeHeight) Whitelist(_owners) {
+  }
 
   function _processDeposit() internal override {
     require(msg.value == denomination, "Please send `mixDenomination` ETH along with transaction");
